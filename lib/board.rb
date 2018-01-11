@@ -27,11 +27,6 @@ class Board
 
     r_idx, c_idx = coord(position)
 
-    # col, row = position.split('')
-    # r_idx = row.to_i - 1
-    # c_idx = COLS[col.downcase.to_sym]
-
-
     # TODO: Take 'type' into account when initialize a piece
     if type.downcase == 'knight'
       @tiles[r_idx][c_idx] = Knight.new(r_idx, c_idx)
