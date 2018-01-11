@@ -25,9 +25,11 @@ class Board
   def add_piece type, position
     # TODO: validate before adding a piece on the board
 
-    col, row = position.split('')
-    c_idx = COLS[col.downcase.to_sym]
-    r_idx = row.to_i - 1
+    r_idx, c_idx = coord(position)
+
+    # col, row = position.split('')
+    # r_idx = row.to_i - 1
+    # c_idx = COLS[col.downcase.to_sym]
 
 
     # TODO: Take 'type' into account when initialize a piece
@@ -60,6 +62,15 @@ class Board
 
     []
   end
+
+  def coord position
+    col, row = position.split('')
+    r_idx = row.to_i - 1
+    c_idx = COLS[col.downcase.to_sym]
+
+    [r_idx, c_idx]
+  end
+  private :coord
 
   def display
     puts "  | " + COLS.keys.sort.collect{|p| p.to_s }.join(" | ")
