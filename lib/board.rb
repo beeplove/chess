@@ -31,7 +31,11 @@ class Board
 
 
     # TODO: Take 'type' into account when initialize a piece
-    @tiles[r_idx][c_idx] = Piece.new
+    if type.downcase == 'knight'
+      @tiles[r_idx][c_idx] = Knight.new(r_idx, c_idx)
+    else
+      @tiles[r_idx][c_idx] = Piece.new
+    end
   end
 
   # to initialize a board with a set of specified pieces
