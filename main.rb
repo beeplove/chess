@@ -15,8 +15,12 @@ position = ARGV.shift || help
 # - pass the input the library to get available move
 
 board = Board.init_with_pieces([[piece, position]])
-moves = board.available_moves(position)
+moves = board.available_moves(position).collect { |coord|
+  position = Board.position(coord)
+  board.add_piece('pawn', position) # just for display purpose
+  position
+}
 
-puts moves.inspect
+puts moves.join(', ')
 
 board.display

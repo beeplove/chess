@@ -1,10 +1,4 @@
 class Knight < Piece
-  attr_reader :r_idx, :c_idx
-
-  def initialize r_idx, c_idx
-    @r_idx = r_idx
-    @c_idx = c_idx
-  end
 
   def name
     "K"

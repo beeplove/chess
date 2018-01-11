@@ -12,6 +12,8 @@ class Board
     h: 7
   }
 
+  COL_NAMES = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']
+
   # start an empty board without any piece on it
   def initialize
     @tiles = Array.new(WIDTH)
@@ -23,13 +25,13 @@ class Board
 
   # To add a piece on the board
   def add_piece type, position
-    r_idx, c_idx = coord(position)
+    r_idx, c_idx = Board.coord(position)
 
     # TODO: Take 'type' into account when initialize a piece
     if type.downcase == 'knight'
       @tiles[r_idx][c_idx] = Knight.new(r_idx, c_idx)
     else
-      @tiles[r_idx][c_idx] = Piece.new
+      @tiles[r_idx][c_idx] = Piece.new(r_idx, c_idx)
     end
   end
 
@@ -55,14 +57,14 @@ class Board
     # TODO
     # - Add test cases
 
-    r_idx, c_idx = coord(position)
+    r_idx, c_idx = Board.coord(position)
     @tiles[r_idx][c_idx].available_moves
   end
 
   # return 0 based coord of a position
   # parameter: b7
   # result: [6, 1]
-  def coord position
+  def self.coord position
     # TODO:
     # - validate posistion (such as boundary, rank and row) on the board
     col, row = position.split('')
@@ -71,7 +73,19 @@ class Board
 
     [r_idx, c_idx]
   end
-  private :coord
+
+  # return readable position of a piece
+  # parameter [1, 1]
+  # result: b2
+  def self.position coord
+    # TODO
+    # - Add test case
+    r_idx, c_idx = coord
+    [COL_NAMES[c_idx], (r_idx + 1).to_s].join
+  end
+
+  # TODO
+  # - possible refactor to move coord and position to a class such as, tile or coord or grid
 
   def display
     puts "  | " + COLS.keys.sort.collect{|p| p.to_s }.join(" | ")
