@@ -15,4 +15,8 @@ position = ARGV.shift || help
 # - pass the input the library to get available move
 
 board = Board.init_with_pieces([[piece, position]])
-puts board.available_moves(position).inspect
+moves = board.available_moves(position)
+
+puts moves.inspect
+
+board.display
