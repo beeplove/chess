@@ -65,7 +65,7 @@ class Board
     puts "  | " + COLS.keys.sort.collect{|p| p.to_s }.join(" | ")
     puts "----------------------------------"
     @tiles.each_with_index do | row, r |
-      puts "#{r} | " + row.collect {|p| p.nil? ? " " : p.name }.join(" | ")
+      puts "#{r + 1} | " + row.collect {|p| p.nil? ? " " : p.name }.join(" | ")
     end
   end
 end
