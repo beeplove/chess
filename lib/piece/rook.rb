@@ -4,8 +4,6 @@ class Rook < Piece
   end
 
   def available_moves
-    moves = []
-
-    moves
+    avilable_straight_moves
   end
 end

@@ -30,6 +30,8 @@ class Board
     # TODO: Take 'type' into account when initialize a piece
     if type.downcase == 'knight'
       @tiles[r_idx][c_idx] = Knight.new(r_idx, c_idx)
+    elsif type.downcase == 'rook'
+      @tiles[r_idx][c_idx] = Rook.new(r_idx, c_idx)
     else
       @tiles[r_idx][c_idx] = Piece.new(r_idx, c_idx)
     end
