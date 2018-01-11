@@ -23,8 +23,6 @@ class Board
 
   # To add a piece on the board
   def add_piece type, position
-    # TODO: validate before adding a piece on the board
-
     r_idx, c_idx = coord(position)
 
     # TODO: Take 'type' into account when initialize a piece
@@ -54,11 +52,19 @@ class Board
 
   # Return an array of available positions for the piece on specified current position
   def available_moves position
+    # TODO
+    # - Add test cases
 
-    []
+    r_idx, c_idx = coord(position)
+    @tiles[r_idx][c_idx].available_moves
   end
 
+  # return 0 based coord of a position
+  # parameter: b7
+  # result: [6, 1]
   def coord position
+    # TODO:
+    # - validate posistion (such as boundary, rank and row) on the board
     col, row = position.split('')
     r_idx = row.to_i - 1
     c_idx = COLS[col.downcase.to_sym]

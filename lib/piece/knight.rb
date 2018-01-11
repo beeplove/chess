@@ -39,7 +39,7 @@ class Knight < Piece
 
     # TODO:
     # - Add test cases
-    # - similar code, may have room for meta-programming, possible refactor
+    # - code with duplicate pattern, may have room for meta-programming, possible refactor
 
     moves
   end
