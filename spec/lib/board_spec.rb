@@ -2,6 +2,24 @@ require './chess'
 
 RSpec.describe Board do
 
+  describe ".coord" do
+    it "should return [0,0] for position a1" do
+      expect(Board.coord("a1")).to eq([0,0])
+    end
+
+    it "should return [7,7] for position h8" do
+      expect(Board.coord("h8")).to eq([7,7])
+    end
+
+    it "accept uppercase position too" do
+      expect(Board.coord("C8")).to eq([7,2])
+    end
+
+    it "should raise InvalidPosition for incorrect position" do
+      expect(Board.coord("a0")).to raise_error(InvalidPosition)
+    end
+  end
+
   describe "#available_moves" do
     context "when piece is Rook" do
       before(:each) do
@@ -15,5 +33,6 @@ RSpec.describe Board do
         expect(moves.size).to eq(14)
       end
     end
+
   end
 end
