@@ -35,4 +35,13 @@ class Piece
 
     moves
   end
+
+  def avilable_diagonal_moves
+    moves = []
+
+    # Possible moves
+    # - all possible combination of increment/decrement of r_idx/c_idx
+
+    moves
+  end
 end
