@@ -1,3 +1,4 @@
+
 Given standard algebraic notation of the a chess board, write code that will:
 
 Accept two parameters:
@@ -14,3 +15,13 @@ Rules:
 
 Example:
 If the code is passed: "knight, d2", outout should be: "b1, f1, b3, f3, c4, e4"
+
+Usage:
+
+```
+$ ruby main.rb knight d2
+```
+should generate output
+```
+f3, b3, f1, b1, e4, c4
+```
