@@ -15,8 +15,8 @@ RSpec.describe Board do
       expect(Board.coord("C8")).to eq([7,2])
     end
 
-    it "should raise InvalidPosition for incorrect position" do
-      expect(Board.coord("a0")).to raise_error(InvalidPosition)
+    it "should raise PositionError for incorrect position" do
+      expect{ Board.coord("a0") }.to raise_error(PositionError)
     end
   end
 

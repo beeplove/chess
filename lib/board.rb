@@ -72,8 +72,12 @@ class Board
     # TODO:
     # - validate posistion (such as boundary, rank and row) on the board
     col, row = position.split('')
+
     r_idx = row.to_i - 1
+    raise PositionError, "'#{position}' is not a valid position." if r_idx < 0 || r_idx > 7
+
     c_idx = COLS[col.downcase.to_sym]
+    raise PositionError, "'#{position}' is not a valid position." if c_idx.nil?
 
     [r_idx, c_idx]
   end
