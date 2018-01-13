@@ -19,6 +19,7 @@ RSpec.describe Board do
       expect{ Board.coord("a0") }.to raise_error(PositionError)
       expect{ Board.coord("1a") }.to raise_error(PositionError)
       expect{ Board.coord("b10") }.to raise_error(PositionError)
+      expect{ Board.coord(['a', '1']) }.to raise_error(PositionError)
     end
   end
 

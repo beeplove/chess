@@ -69,8 +69,9 @@ class Board
   # parameter: b7
   # result: [6, 1]
   def self.coord position
-    # TODO:
-    # - validate posistion (such as boundary, rank and row) on the board
+    raise PositionError, "'#{position}' is not a valid position." unless position.instance_of? String
+    raise PositionError, "'#{position}' is not a valid position." unless position.size == 2
+
     col, row = position.split('')
 
     r_idx = row.to_i - 1
