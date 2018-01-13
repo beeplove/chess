@@ -17,6 +17,8 @@ RSpec.describe Board do
 
     it "should raise PositionError for incorrect position" do
       expect{ Board.coord("a0") }.to raise_error(PositionError)
+      expect{ Board.coord("1a") }.to raise_error(PositionError)
+      expect{ Board.coord("b10") }.to raise_error(PositionError)
     end
   end
 

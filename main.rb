@@ -18,9 +18,10 @@ begin
     position
   }
 
+  board.display
+  puts "\n\n\n"
   puts moves.join(', ')
 
-  board.display
 rescue PositionError => e
   puts e.message
 rescue => e
