@@ -151,6 +151,37 @@ RSpec.describe Board do
           expect(moves.include? [row, coord[1]]).to be true
         end
       end
+    end
+
+    context "when piece is Knight" do
+      let(:board) { Board.new }
+      let(:type) { 'knight' }
+
+      it "should have 2 available moves if current position is one of the corner" do
+        %w{ a1 a8 h1 h8}.each do |position|
+          board.add_piece(type, position)
+          moves = board.available_moves(position)
+          expect(moves.size).to eq(2)
+        end
+      end
+
+      it "should have 3 available moves from one of the begining positions of knight" do
+        %w{ a2 a7 h2 h7}.each do |position|
+          board.add_piece(type, position)
+          moves = board.available_moves(position)
+          expect(moves.size).to eq(3)
+        end
+      end
+
+      it "should have 8 available moves from one of center position" do
+        %w{ d4 d5 e4 e5}.each do |position|
+          board.add_piece(type, position)
+          moves = board.available_moves(position)
+          expect(moves.size).to eq(8)
+        end
+      end
+
+
 
     end
   end
