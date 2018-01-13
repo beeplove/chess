@@ -1,7 +1,7 @@
 class Knight < Piece
 
   def name
-    "K"
+    "N"
   end
 
   def available_moves
