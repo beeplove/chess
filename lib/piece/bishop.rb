@@ -1,6 +1,9 @@
 class Bishop < Piece
+  def name
+    "B"
+  end
+
   def available_moves
-    # TODO: Implement!
-    []
+    avilable_diagonal_moves
   end
 end
