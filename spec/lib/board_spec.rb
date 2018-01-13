@@ -28,6 +28,11 @@ RSpec.describe Board do
       expect(Board.position([2, 1])).to eq("b3")
     end
 
+    it "should raise CoordError for incorrect coord" do
+      expect{ Board.position([1, 8]) }.to raise_error(CoordError)
+    end
+
+
   end
 
   describe "#available_moves" do
