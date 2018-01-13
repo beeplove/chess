@@ -22,8 +22,9 @@ begin
   puts "\n\n\n"
   puts moves.join(', ')
 
-rescue PositionError => e
+rescue ChessError => e
   puts e.message
 rescue => e
-  puts e.message
+  puts "Something went wrong!"
+  puts e.inspect
 end
