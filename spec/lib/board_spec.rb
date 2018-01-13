@@ -102,12 +102,21 @@ RSpec.describe Board do
   describe "#available_moves" do
     context "when piece is Rook" do
       let(:board) { Board.new }
+      let(:type) { 'rook' }
 
       it "total number of possible moves should be 14" do
         position = 'a1'
-        board.add_piece('rook', position)
+        board.add_piece(type, position)
         moves = board.available_moves(position)
         expect(moves.size).to eq(14)
+      end
+
+      it "should not include current position in the available" do
+        position = 'e4'
+        coord = [3, 4]
+        board.add_piece(type, position)
+        moves = board.available_moves(position)
+        expect(moves.none? {|c| c == coord}).to be true
       end
     end
   end
