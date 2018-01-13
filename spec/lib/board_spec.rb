@@ -36,13 +36,30 @@ RSpec.describe Board do
     end
   end
 
+  describe "#initialize" do
+    let(:board) { Board.new }
+    let(:tiles) { board.instance_variable_get(:@tiles)}
+
+    it "should initialize board with 8x8 tiles with no pieces" do
+      expect(tiles.size).to eq(8)
+      tiles.each_with_index do |row, i|
+        expect(row.size).to eq(8)
+        expect(row[i]).to be nil
+      end
+    end
+  end
+
   describe "#add_piece" do
     let(:board) { Board.new }
+    let(:tiles) { board.instance_variable_get(:@tiles)}
 
     it "should assign a Piece to the tile" do
-      expect(board.instance_variable_get(:@tiles)[1][1]).to eq(nil)
+      expect(tiles[1][1]).to eq(nil)
       board.add_piece('knight', 'b2')
-      expect(board.instance_variable_get(:@tiles)[1][1].instance_of? Knight).to eq(true)
+      expect(tiles[1][1].instance_of? Knight).to be true
+    end
+
+    it "should add only the known pieces" do
     end
   end
 
@@ -57,6 +74,5 @@ RSpec.describe Board do
         expect(moves.size).to eq(14)
       end
     end
-
   end
 end
