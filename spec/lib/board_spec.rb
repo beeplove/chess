@@ -34,20 +34,26 @@ RSpec.describe Board do
       expect{ Board.position("b1") }.to raise_error(CoordError)
       expect{ Board.position([1, 2, 3]) }.to raise_error(CoordError)
     end
+  end
 
+  describe "#add_piece" do
+    let(:board) { Board.new }
 
+    it "should assign a Piece to the tile" do
+      expect(board.instance_variable_get(:@tiles)[1][1]).to eq(nil)
+      board.add_piece('knight', 'b2')
+      expect(board.instance_variable_get(:@tiles)[1][1].instance_of? Knight).to eq(true)
+    end
   end
 
   describe "#available_moves" do
     context "when piece is Rook" do
-      before(:each) do
-        @board = Board.new
-      end
+      let(:board) { Board.new }
 
       it "total number of possible moves should be 14" do
         position = 'a1'
-        @board.add_piece('rook', position)
-        moves = @board.available_moves(position) 
+        board.add_piece('rook', position)
+        moves = board.available_moves(position)
         expect(moves.size).to eq(14)
       end
     end
