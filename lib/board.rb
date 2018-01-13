@@ -62,10 +62,9 @@ class Board
   end
 
   # Return an array of available positions for the piece on specified current position
+  # TODO:
+  # - Consider parameter to accept Piece instance as well, in addition to position
   def available_moves position
-    # TODO
-    # - Add test cases
-
     r_idx, c_idx = Board.coord(position)
     @tiles[r_idx][c_idx].available_moves
   end
