@@ -23,11 +23,19 @@ class Board
     }
   end
 
-  # To add a piece on the board
+  # Add a piece on the board, if position already occupied, overwrite.
+  # Parameters:
+  #  - type (rook, knight, bishop, king, queen, pawn)
+  #  - position in algebric notation
   def add_piece type, position
+    raise PieceError, "Piece type seems to be invalid." unless type.instance_of? String
+
+    type = type.strip.downcase
+    raise PieceError, "Piece type seems to be invalid." if ['rook', 'knight', 'bishop', 'king', 'queen', 'pawn'].none? { |v| v == type }
+
     r_idx, c_idx = Board.coord(position)
 
-    # TODO: Take 'type' into account when initialize a piece
+
     if type.downcase == 'knight'
       @tiles[r_idx][c_idx] = Knight.new(r_idx, c_idx)
     elsif type.downcase == 'rook'

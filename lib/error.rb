@@ -6,3 +6,6 @@ end
 
 class CoordError < ChessError
 end
+
+class PieceError < ChessError
+end
