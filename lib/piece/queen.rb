@@ -3,7 +3,7 @@ class Queen < Piece
     "Q"
   end
 
-  def available_moves
-    avilable_straight_moves + avilable_diagonal_moves
+  def potential_moves
+    potential_straight_moves + potential_diagonal_moves
   end
 end

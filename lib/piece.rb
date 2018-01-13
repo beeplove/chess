@@ -12,13 +12,13 @@ class Piece
     "x"
   end
 
-  def available_moves
+  def potential_moves
     # TODO
     # - raise a more specific error
-    raise ArgumentError, "class Piece is an abstraction class, please create subclass from Piece for your piece and implement available_moves"
+    raise ArgumentError, "class Piece is an abstraction class, please create subclass from Piece for your piece and implement potential_moves"
   end
 
-  def avilable_straight_moves
+  def potential_straight_moves
     moves = []
 
     # Possible moves
@@ -36,7 +36,7 @@ class Piece
     moves
   end
 
-  def avilable_diagonal_moves
+  def potential_diagonal_moves
     moves = []
 
     # Possible moves
@@ -77,6 +77,9 @@ class Piece
       r -= 1
       c -= 1
     end
+
+    # TODO
+    #  - refactor to avoid repeated pattern of code without compromising with runtime
 
     moves
   end

@@ -3,7 +3,7 @@ class King < Piece
     "K"
   end
 
-  def available_moves
+  def potential_moves
     # TODO: Implement!
     []
   end

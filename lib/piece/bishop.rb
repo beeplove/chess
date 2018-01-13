@@ -3,7 +3,7 @@ class Bishop < Piece
     "B"
   end
 
-  def available_moves
-    avilable_diagonal_moves
+  def potential_moves
+    potential_diagonal_moves
   end
 end

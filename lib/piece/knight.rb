@@ -4,7 +4,7 @@ class Knight < Piece
     "N"
   end
 
-  def available_moves
+  def potential_moves
     # 8 possible moves from the logic below
     # - row increment/decrement by 1, col decrement/indrement by 2
     # - col increment/decrement by 1, row decrement/indrement by 2

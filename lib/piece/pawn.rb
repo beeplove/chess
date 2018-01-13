@@ -1,5 +1,5 @@
 class Pawn < Piece
-  def available_moves
+  def potential_moves
     # TODO: Implement!
     []
   end

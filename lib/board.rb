@@ -64,9 +64,10 @@ class Board
   # Return an array of available positions for the piece on specified current position
   # TODO:
   # - Consider parameter to accept Piece instance as well, in addition to position
+  # - consider other factors such as tile already occupied by same color piece, piece is in absolute pin
   def available_moves position
     r_idx, c_idx = Board.coord(position)
-    @tiles[r_idx][c_idx].available_moves
+    @tiles[r_idx][c_idx].potential_moves
   end
 
   # return 0 based coord of a position

@@ -3,7 +3,7 @@ class Rook < Piece
     "R"
   end
 
-  def available_moves
-    avilable_straight_moves
+  def potential_moves
+    potential_straight_moves
   end
 end
