@@ -68,6 +68,12 @@ RSpec.describe Board do
       expect(tiles[1][1].instance_of? Queen).to be true
     end
 
+    it "should assign a Pawn to the tile when added a pawn" do
+      board.add_piece('pawn', 'b2')
+      expect(tiles[1][1].instance_of? Pawn).to be true
+    end
+
+
     it "should accept piece type in any case (not case sensitive)" do
       board.add_piece('Queen', 'b2')
       expect(tiles[1][1].instance_of? Queen).to be true
