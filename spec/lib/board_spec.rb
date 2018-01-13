@@ -79,6 +79,9 @@ RSpec.describe Board do
       expect(tiles[1][1].instance_of? Rook).to be true
     end
 
+    it "should raise error when attempting to add an unknow piece type" do
+      expect { board.add_piece("Horse", "b2") }.to raise_error(PieceError)
+    end
   end
 
   describe "#available_moves" do
