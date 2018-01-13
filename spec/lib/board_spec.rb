@@ -119,7 +119,7 @@ RSpec.describe Board do
         expect(moves.none? {|c| c == coord}).to be true
       end
 
-      it "should include all tiles in the row" do
+      it "should be able to move to any tile on the same row" do
         position = "b6"
         coord = [5, 1]
 
@@ -131,6 +131,20 @@ RSpec.describe Board do
           expect(moves.include? [coord[0], col]).to be true
         end
       end
+
+      it "should be able to move to any tile on the same column" do
+        position = "b6"
+        coord = [5, 1]
+
+        board.add_piece(type, position)
+        moves = board.available_moves(position)
+
+        0.upto(Board::WIDTH - 1) do |row|
+          next if row == coord[0]
+          expect(moves.include? [row, coord[1]]).to be true
+        end
+      end
+
     end
   end
 end
