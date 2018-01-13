@@ -35,15 +35,7 @@ class Board
 
     r_idx, c_idx = Board.coord(position)
 
-    if type.downcase == 'knight'
-      @tiles[r_idx][c_idx] = Knight.new(r_idx, c_idx)
-    elsif type.downcase == 'rook'
-      @tiles[r_idx][c_idx] = Rook.new(r_idx, c_idx)
-    elsif type.downcase == 'queen'
-      @tiles[r_idx][c_idx] = Queen.new(r_idx, c_idx)
-    elsif type.downcase == 'pawn'
-      @tiles[r_idx][c_idx] = Pawn.new(r_idx, c_idx)
-    end
+    @tiles[r_idx][c_idx] = Object.const_get(type.capitalize).send(:new, r_idx, c_idx)
   end
 
   # to initialize a board with a set of specified pieces
