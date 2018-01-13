@@ -53,14 +53,32 @@ RSpec.describe Board do
     let(:board) { Board.new }
     let(:tiles) { board.instance_variable_get(:@tiles)}
 
-    it "should assign a Piece to the tile" do
-      expect(tiles[1][1]).to eq(nil)
+    it "should assign a Rook to the tile when added a rook" do
+      board.add_piece('rook', 'b2')
+      expect(tiles[1][1].instance_of? Rook).to be true
+    end
+
+    it "should assign a Knight to the tile when added a knight" do
       board.add_piece('knight', 'b2')
       expect(tiles[1][1].instance_of? Knight).to be true
     end
 
-    it "should add only the known pieces" do
+    it "should assign a Queen to the tile when added a queen" do
+      board.add_piece('queen', 'b2')
+      expect(tiles[1][1].instance_of? Queen).to be true
     end
+
+    it "should accept piece type in any case (not case sensitive)" do
+      board.add_piece('Queen', 'b2')
+      expect(tiles[1][1].instance_of? Queen).to be true
+
+      board.add_piece('KNIGHT', 'b2')
+      expect(tiles[1][1].instance_of? Knight).to be true
+
+      board.add_piece('rOoK', 'b2')
+      expect(tiles[1][1].instance_of? Rook).to be true
+    end
+
   end
 
   describe "#available_moves" do
