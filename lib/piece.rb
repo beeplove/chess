@@ -42,6 +42,42 @@ class Piece
     # Possible moves
     # - all possible combination of increment/decrement of r_idx/c_idx
 
+    # top-right: row-decrement, column-increment [4, 5] [3, 6]
+    r = r_idx - 1
+    c = c_idx + 1
+    while (r >= 0) && (c <= Board::WIDTH - 1)
+      moves << [r, c]
+      r -= 1
+      c += 1
+    end
+
+    # bottom-right: row-increment, column-increment [4, 5] [5, 6]
+    r = r_idx + 1
+    c = c_idx + 1
+    while (r <= Board::WIDTH - 1) && (c <= Board::WIDTH - 1)
+      moves << [r, c]
+      r += 1
+      c += 1
+    end
+
+    # bottom-left: row-increment, column-decrement [4, 5] [5, 4]
+    r = r_idx + 1
+    c = c_idx - 1
+    while (r <= Board::WIDTH - 1) && (c >= 0)
+      moves << [r, c]
+      r += 1
+      c -= 1
+    end
+
+    # top-left: row-decrement, column-decrement [4, 5] [3, 4]
+    r = r_idx - 1
+    c = c_idx - 1
+    while (r >= 0) && (c >= 0)
+      moves << [r, c]
+      r -= 1
+      c -= 1
+    end
+
     moves
   end
 end
