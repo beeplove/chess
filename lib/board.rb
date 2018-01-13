@@ -38,14 +38,19 @@ class Board
     @tiles[r_idx][c_idx] = Object.const_get(type.capitalize).send(:new, r_idx, c_idx)
   end
 
-  # to initialize a board with a set of specified pieces
+  # to initialize a board with a set of specified pieces, mostly to facilitate the
+  # assignment of multiple pieces, which can be use to setup a new game or to try out
+  # some moves
+  #
   # parameters:
   #   [ ["knight", "b2"] ]
   #   [ ["rook", "a1"], [ "knight", "a2"] ]
   def self.init_with_pieces pieces=[]
     board = Board.new
 
-    # TODO: validate the input before initialize the board
+    # TODO
+    # - Add test cases
+    # - subarray shouldn't contain more than 2 elements
     pieces.each do |piece|
       type = piece[0]
       position = piece[1]
