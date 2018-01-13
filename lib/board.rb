@@ -34,8 +34,9 @@ class Board
     raise PieceError, "Piece type seems to be invalid." if ['rook', 'knight', 'bishop', 'king', 'queen', 'pawn'].none? { |v| v == type }
 
     r_idx, c_idx = Board.coord(position)
-
     @tiles[r_idx][c_idx] = Object.const_get(type.capitalize).send(:new, r_idx, c_idx)
+
+    @tiles[r_idx][c_idx]
   end
 
   # to initialize a board with a set of specified pieces, mostly to facilitate the

@@ -94,6 +94,13 @@ RSpec.describe Board do
       expect(tiles[1][1].instance_of? Rook).to be true
     end
 
+    it "should return a kind of a Piece" do
+      %w{ rook knight bishop king queen pawn}.each do |type|
+        piece = board.add_piece(type, 'c4')
+        expect(piece.kind_of? Piece).to be true
+      end
+    end
+
     it "should raise error when attempting to add an unknow piece type" do
       expect { board.add_piece("Horse", "b2") }.to raise_error(PieceError)
     end
