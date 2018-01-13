@@ -23,6 +23,13 @@ RSpec.describe Board do
     end
   end
 
+  describe ".position" do
+    it "should return b3 for coord [2, 1]" do
+      expect(Board.position([2, 1])).to eq("b3")
+    end
+
+  end
+
   describe "#available_moves" do
     context "when piece is Rook" do
       before(:each) do
