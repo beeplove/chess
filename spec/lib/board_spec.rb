@@ -181,7 +181,12 @@ RSpec.describe Board do
         end
       end
 
-
+      it "should be move to d1 or h1 from f2" do
+        board.add_piece(type, 'f2')
+        moves = board.available_moves('f2')
+        expect(moves.include? [0,3]).to be true
+        expect(moves.include? [0,7]).to be true
+      end
 
     end
   end
