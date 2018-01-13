@@ -69,8 +69,8 @@ class Board
   # parameter: b7
   # result: [6, 1]
   def self.coord position
-    raise PositionError, "'#{position}' is not a valid position." unless position.instance_of? String
-    raise PositionError, "'#{position}' is not a valid position." unless position.size == 2
+    raise PositionError, "Value received for position is invalid." unless position.instance_of? String
+    raise PositionError, "Value received for position is invalid." unless position.size == 2
 
     col, row = position.split('')
 
@@ -84,12 +84,17 @@ class Board
   end
 
   # return readable position of a piece
-  # parameter [1, 1]
-  # result: b2
+  # parameter [7, 4]
+  # result: e8
   def self.position coord
-    # TODO
-    # - Add test case
+    raise CoordError, "Value received for coord is invalid." unless coord.instance_of? Array
+    raise CoordError, "Value received for coord is invalid." unless coord.size == 2
+
     r_idx, c_idx = coord
+
+    raise CoordError, "'#{coord.inspect}' is not a valid position." if r_idx < 0 || r_idx > 7
+    raise CoordError, "'#{coord.inspect}' is not a valid position." if c_idx < 0 || c_idx > 7
+
     [COL_NAMES[c_idx], (r_idx + 1).to_s].join
   end
 
