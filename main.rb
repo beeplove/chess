@@ -2,8 +2,8 @@ require './chess'
 
 def help
   puts ""
-  puts "main.rb <piece> <current position>"
-  puts "example: main.rb knight b2"
+  puts "ruby main.rb <piece> <current position>"
+  puts "example: ruby main.rb knight b2"
   exit
 end
 
