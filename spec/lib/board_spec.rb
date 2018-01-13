@@ -181,13 +181,57 @@ RSpec.describe Board do
         end
       end
 
-      it "should be move to d1 or h1 from f2" do
+      it "should be able to move to d1 or h1 from f2" do
         board.add_piece(type, 'f2')
         moves = board.available_moves('f2')
         expect(moves.include? [0,3]).to be true
         expect(moves.include? [0,7]).to be true
       end
+    end
 
+    context "when piece is Queen" do
+      let(:board) { Board.new }
+      let(:type) { 'queen' }
+
+      it "should have 27 available moves from one the center position" do
+        %w{ d4 d5 e4 e5}.each do |position|
+          board.add_piece(type, position)
+          moves = board.available_moves(position)
+          expect(moves.size).to eq(27)
+        end
+      end
+
+      it "should have 21 available moves if current position is one of the corner" do
+        %w{ a1 a8 h1 h8}.each do |position|
+          board.add_piece(type, position)
+          moves = board.available_moves(position)
+          expect(moves.size).to eq(21)
+        end
+      end
+
+      it "should able to move horizontally" do
+        board.add_piece(type, "d8")
+        moves = board.available_moves("d8")
+        [[7,0],[7,1],[7,2],[7,4],[7,5],[7,6],[7,7]].each do |move|
+          expect(moves.include? move).to be true
+        end
+      end
+
+      it "should able to move vertically" do
+        board.add_piece(type, "d8")
+        moves = board.available_moves("d8")
+        [[0,3],[1,3],[2,3],[3,3],[4,3],[5,3],[6,3]].each do |move|
+          expect(moves.include? move).to be true
+        end
+      end
+
+      it "should able to move diagonally" do
+        board.add_piece(type, "d8")
+        moves = board.available_moves("d8")
+        [[6,4],[5,5],[4,6],[3,7],[6,2],[5,1],[4,0]].each do |move|
+          expect(moves.include? move).to be true
+        end
+      end
     end
   end
 end
