@@ -36,16 +36,27 @@ class Piece
     moves
   end
 
-  def potential_diagonal_moves
+  #
+  # To be used by King, Queen and Bishop
+  # when used by King there should have limit passed as param with value 1
+  #
+  # Parameter
+  # - limit
+  def potential_diagonal_moves is_king=false
     moves = []
 
     # Possible moves
     # - all possible combination of increment/decrement of r_idx/c_idx
 
+    r_min = is_king ? (r_idx - 1 >= 0 ? r_idx - 1 : r_idx) : 0
+    c_min = is_king ? (c_idx - 1 >= 0 ? c_idx - 1 : c_idx) : 0
+    r_max = is_king ? (r_idx + 1 <= 7 ? r_idx + 1 : r_idx) : Board::WIDTH - 1
+    c_max = is_king ? (c_idx + 1 <= 7 ? c_idx + 1 : c_idx) : Board::WIDTH - 1
+
     # top-right: row-decrement, column-increment [4, 5] [3, 6]
     r = r_idx - 1
     c = c_idx + 1
-    while (r >= 0) && (c <= Board::WIDTH - 1)
+    while (r >= r_min) && (c <= c_max)
       moves << [r, c]
       r -= 1
       c += 1
@@ -54,7 +65,7 @@ class Piece
     # bottom-right: row-increment, column-increment [4, 5] [5, 6]
     r = r_idx + 1
     c = c_idx + 1
-    while (r <= Board::WIDTH - 1) && (c <= Board::WIDTH - 1)
+    while (r <= r_max) && (c <= c_max)
       moves << [r, c]
       r += 1
       c += 1
@@ -63,7 +74,7 @@ class Piece
     # bottom-left: row-increment, column-decrement [4, 5] [5, 4]
     r = r_idx + 1
     c = c_idx - 1
-    while (r <= Board::WIDTH - 1) && (c >= 0)
+    while (r <= r_max) && (c >= c_min)
       moves << [r, c]
       r += 1
       c -= 1
@@ -72,7 +83,7 @@ class Piece
     # top-left: row-decrement, column-decrement [4, 5] [3, 4]
     r = r_idx - 1
     c = c_idx - 1
-    while (r >= 0) && (c >= 0)
+    while (r >= r_min) && (c >= c_min)
       moves << [r, c]
       r -= 1
       c -= 1
