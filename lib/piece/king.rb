@@ -4,7 +4,6 @@ class King < Piece
   end
 
   def potential_moves
-    # TODO: Implement!
-    []
+    potential_diagonal_moves(true) + potential_straight_moves(true)
   end
 end
