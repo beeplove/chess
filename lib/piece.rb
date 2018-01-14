@@ -18,19 +18,36 @@ class Piece
     raise ArgumentError, "class Piece is an abstraction class, please create subclass from Piece for your piece and implement potential_moves"
   end
 
-  def potential_straight_moves
+  def potential_straight_moves is_king=false
     moves = []
 
     # Possible moves
     # - r_idx fixed, c_idx increment/decrement
     # - c_idx fixed, r_idx increment/decrement
 
-    0.upto(Board::WIDTH - 1) { |i|
-      moves << [r_idx, i] if i != c_idx
+    r_min = is_king ? (r_idx - 1 >= 0 ? r_idx - 1 : r_idx) : 0
+    c_min = is_king ? (c_idx - 1 >= 0 ? c_idx - 1 : c_idx) : 0
+    r_max = is_king ? (r_idx + 1 <= 7 ? r_idx + 1 : r_idx) : Board::WIDTH - 1
+    c_max = is_king ? (c_idx + 1 <= 7 ? c_idx + 1 : c_idx) : Board::WIDTH - 1
+
+    # right
+    (c_idx + 1).upto(c_max) { |i|
+      moves << [r_idx, i]
     }
 
-    0.upto(Board::WIDTH - 1) { |i|
-      moves << [i, c_idx] if i != r_idx
+    # bottom
+    (r_idx + 1).upto(r_max) { |i|
+      moves << [i, c_idx]
+    }
+
+    # left
+    (c_min).upto(c_idx - 1) { |i|
+      moves << [r_idx, i]
+    }
+
+    # top
+    (r_min).upto(r_idx - 1) { |i|
+      moves << [i, c_idx]
     }
 
     moves
