@@ -2,9 +2,24 @@
 class Piece
   attr_reader :r_idx, :c_idx
 
-  def initialize r_idx, c_idx
+  def initialize r_idx, c_idx, color='white'
+    color ||= 'white'
+    raise PieceError unless color.instance_of? String
+
+    color = color.strip.downcase
+    raise PieceError if %w{white black}.none? { |c| c == color }
+
     @r_idx = r_idx
     @c_idx = c_idx
+    @is_white = color == 'white'
+  end
+
+  def white?
+    !!@is_white
+  end
+
+  def black?
+    !@is_white
   end
 
   # TODO: dummy method, may not be necessary
