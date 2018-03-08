@@ -27,14 +27,18 @@ class Board
   # Parameters:
   #  - type (rook, knight, bishop, king, queen, pawn)
   #  - position in algebric notation
-  def add_piece type, position
+  def add_piece color, type, position
     raise PieceError, "Piece type seems to be invalid." unless type.instance_of? String
+    raise PieceError, "Piece color seems to be invalid." unless color.instance_of? String
 
     type = type.strip.downcase
     raise PieceError, "Piece type seems to be invalid." if ['rook', 'knight', 'bishop', 'king', 'queen', 'pawn'].none? { |v| v == type }
 
+    color = color.strip.downcase
+    raise PieceError, "Piece color can't be anything other than white or black" if ['white', 'black'].none? { |v| v == color }
+
     r_idx, c_idx = Board.coord(position)
-    @tiles[r_idx][c_idx] = Object.const_get(type.capitalize).send(:new, r_idx, c_idx)
+    @tiles[r_idx][c_idx] = Object.const_get(type.capitalize).send(:new, r_idx, c_idx, color)
 
     @tiles[r_idx][c_idx]
   end
@@ -44,8 +48,8 @@ class Board
   # some moves
   #
   # parameters:
-  #   [ ["knight", "b2"] ]
-  #   [ ["rook", "a1"], [ "knight", "a2"] ]
+  #   [ ["white", "knight", "b2"] ]
+  #   [ ["white", "rook", "a1"], [ "white", "knight", "a2"] ]
   def self.init_with_pieces pieces=[]
     board = Board.new
 
@@ -53,9 +57,10 @@ class Board
     # - Add test cases
     # - subarray shouldn't contain more than 2 elements
     pieces.each do |piece|
-      type = piece[0]
-      position = piece[1]
-      board.add_piece(type, position)
+      color = piece[0]
+      type = piece[1]
+      position = piece[2]
+      board.add_piece(color, type, position)
     end
 
     board

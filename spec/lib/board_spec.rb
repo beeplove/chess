@@ -54,55 +54,55 @@ RSpec.describe Board do
     let(:tiles) { board.instance_variable_get(:@tiles)}
 
     it "should assign a Rook to the tile when added a rook" do
-      board.add_piece('rook', 'b2')
+      board.add_piece('white', 'rook', 'b2')
       expect(tiles[1][1].instance_of? Rook).to be true
     end
 
     it "should assign a Knight to the tile when added a knight" do
-      board.add_piece('knight', 'b2')
+      board.add_piece('white', 'knight', 'b2')
       expect(tiles[1][1].instance_of? Knight).to be true
     end
 
     it "should assign a Bishop to the tile when added a bishop" do
-      board.add_piece('bishop', 'b2')
+      board.add_piece('white', 'bishop', 'b2')
       expect(tiles[1][1].instance_of? Bishop).to be true
     end
 
     it "should assign a King to the tile when added a king" do
-      board.add_piece('king', 'b2')
+      board.add_piece('white', 'king', 'b2')
       expect(tiles[1][1].instance_of? King).to be true
     end
 
     it "should assign a Queen to the tile when added a queen" do
-      board.add_piece('queen', 'b2')
+      board.add_piece('white', 'queen', 'b2')
       expect(tiles[1][1].instance_of? Queen).to be true
     end
 
     it "should assign a Pawn to the tile when added a pawn" do
-      board.add_piece('pawn', 'b2')
+      board.add_piece('white', 'pawn', 'b2')
       expect(tiles[1][1].instance_of? Pawn).to be true
     end
 
     it "should accept piece type in any case (not case sensitive)" do
-      board.add_piece('Queen', 'b2')
+      board.add_piece('white', 'Queen', 'b2')
       expect(tiles[1][1].instance_of? Queen).to be true
 
-      board.add_piece('KNIGHT', 'b2')
+      board.add_piece('white', 'KNIGHT', 'b2')
       expect(tiles[1][1].instance_of? Knight).to be true
 
-      board.add_piece('rOoK', 'b2')
+      board.add_piece('white', 'rOoK', 'b2')
       expect(tiles[1][1].instance_of? Rook).to be true
     end
 
     it "should return a kind of a Piece" do
       %w{ rook knight bishop king queen pawn}.each do |type|
-        piece = board.add_piece(type, 'c4')
+        piece = board.add_piece('white', type, 'c4')
         expect(piece.kind_of? Piece).to be true
       end
     end
 
     it "should raise error when attempting to add an unknow piece type" do
-      expect { board.add_piece("Horse", "b2") }.to raise_error(PieceError)
+      expect { board.add_piece('white', "Horse", "b2") }.to raise_error(PieceError)
     end
   end
 
@@ -113,7 +113,7 @@ RSpec.describe Board do
 
       it "total number of possible moves should be 14" do
         position = 'a1'
-        board.add_piece(type, position)
+        board.add_piece('white', type, position)
         moves = board.available_moves(position)
         expect(moves.size).to eq(14)
       end
@@ -121,7 +121,7 @@ RSpec.describe Board do
       it "should not include current position in the available" do
         position = 'e4'
         coord = [3, 4]
-        board.add_piece(type, position)
+        board.add_piece('white', type, position)
         moves = board.available_moves(position)
         expect(moves.none? {|c| c == coord}).to be true
       end
@@ -130,7 +130,7 @@ RSpec.describe Board do
         position = "b6"
         coord = [5, 1]
 
-        board.add_piece(type, position)
+        board.add_piece('white', type, position)
         moves = board.available_moves(position)
 
         0.upto(Board::WIDTH - 1) do |col|
@@ -143,7 +143,7 @@ RSpec.describe Board do
         position = "b6"
         coord = [5, 1]
 
-        board.add_piece(type, position)
+        board.add_piece('white', type, position)
         moves = board.available_moves(position)
 
         0.upto(Board::WIDTH - 1) do |row|
@@ -159,7 +159,7 @@ RSpec.describe Board do
 
       it "should have 2 available moves if current position is one of the corner" do
         %w{ a1 a8 h1 h8}.each do |position|
-          board.add_piece(type, position)
+          board.add_piece('white', type, position)
           moves = board.available_moves(position)
           expect(moves.size).to eq(2)
         end
@@ -167,7 +167,7 @@ RSpec.describe Board do
 
       it "should have 3 available moves from one of the begining positions of knight" do
         %w{ a2 a7 h2 h7}.each do |position|
-          board.add_piece(type, position)
+          board.add_piece('white', type, position)
           moves = board.available_moves(position)
           expect(moves.size).to eq(3)
         end
@@ -175,14 +175,14 @@ RSpec.describe Board do
 
       it "should have 8 available moves from one of center position" do
         %w{ d4 d5 e4 e5}.each do |position|
-          board.add_piece(type, position)
+          board.add_piece('white', type, position)
           moves = board.available_moves(position)
           expect(moves.size).to eq(8)
         end
       end
 
       it "should be able to move to d1 or h1 from f2" do
-        board.add_piece(type, 'f2')
+        board.add_piece('white', type, 'f2')
         moves = board.available_moves('f2')
         expect(moves.include? [0,3]).to be true
         expect(moves.include? [0,7]).to be true
@@ -195,7 +195,7 @@ RSpec.describe Board do
 
       it "should have 27 available moves from one the center position" do
         %w{ d4 d5 e4 e5}.each do |position|
-          board.add_piece(type, position)
+          board.add_piece('white', type, position)
           moves = board.available_moves(position)
           expect(moves.size).to eq(27)
         end
@@ -203,14 +203,14 @@ RSpec.describe Board do
 
       it "should have 21 available moves if current position is one of the corner" do
         %w{ a1 a8 h1 h8}.each do |position|
-          board.add_piece(type, position)
+          board.add_piece('white', type, position)
           moves = board.available_moves(position)
           expect(moves.size).to eq(21)
         end
       end
 
       it "should able to move horizontally" do
-        board.add_piece(type, "d8")
+        board.add_piece('white', type, "d8")
         moves = board.available_moves("d8")
         [[7,0],[7,1],[7,2],[7,4],[7,5],[7,6],[7,7]].each do |move|
           expect(moves.include? move).to be true
@@ -218,7 +218,7 @@ RSpec.describe Board do
       end
 
       it "should able to move vertically" do
-        board.add_piece(type, "d8")
+        board.add_piece('white', type, "d8")
         moves = board.available_moves("d8")
         [[0,3],[1,3],[2,3],[3,3],[4,3],[5,3],[6,3]].each do |move|
           expect(moves.include? move).to be true
@@ -226,7 +226,7 @@ RSpec.describe Board do
       end
 
       it "should able to move diagonally" do
-        board.add_piece(type, "d8")
+        board.add_piece('white', type, "d8")
         moves = board.available_moves("d8")
         [[6,4],[5,5],[4,6],[3,7],[6,2],[5,1],[4,0]].each do |move|
           expect(moves.include? move).to be true
