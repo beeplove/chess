@@ -118,4 +118,9 @@ class Board
       puts "#{r + 1} | " + row.collect {|p| p.nil? ? " " : p.name }.join(" | ")
     end
   end
+
+  def piece position
+    x, y = Board.coord(position)
+    @tiles[x][y]
+  end
 end

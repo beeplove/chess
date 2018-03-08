@@ -1,4 +1,5 @@
 require './lib/error'
+require './lib/game'
 require './lib/board'
 require './lib/piece'
 require './lib/piece/rook'
